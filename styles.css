@@ -424,4 +424,23 @@ button:hover {
     iframe {
         height: 400px; /* Ajusta la altura del iframe para pantallas pequeñas */
     }
+
+    /* Ajustar el tamaño de los contenedores */
+    #seccionProductos,
+    #seccionComidas,
+    #seccionSeleccionados,
+    #seccionChatBot {
+        padding: 10px; /* Reduce el padding de los contenedores */
+        margin: 10px; /* Reduce el margen de los contenedores */
+        font-size: 0.9em; /* Reduce el tamaño de la fuente */
+    }
+
+    /* Ajustar el tamaño de los títulos */
+    h1 {
+        font-size: 1.8em; /* Reduce el tamaño del título principal */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Reduce el tamaño de los subtítulos */
+    }
 }
