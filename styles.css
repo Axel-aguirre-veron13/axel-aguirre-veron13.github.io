@@ -389,3 +389,39 @@ button:hover {
 .tooltip:hover {
     display: block;
 }
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .contenedor {
+        padding: 15px; /* Reduce el padding en pantallas pequeñas */
+    }
+
+    .grid-formulario {
+        grid-template-columns: 1fr; /* Una columna en lugar de varias */
+    }
+
+    .contenedor-busqueda {
+        flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+    }
+
+    .tabs {
+        flex-direction: column; /* Cambia a columna para las pestañas */
+    }
+
+    .tab {
+        width: 100%; /* Hacer que las pestañas ocupen todo el ancho */
+        margin-bottom: 10px; /* Espaciado entre pestañas */
+    }
+
+    .resultado-tmb {
+        font-size: 0.9em; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+    }
+
+    .info-icon {
+        font-size: 1em; /* Ajusta el tamaño del ícono de información */
+    }
+
+    iframe {
+        height: 400px; /* Ajusta la altura del iframe para pantallas pequeñas */
+    }
+}
