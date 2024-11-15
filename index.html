@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Nutricional Completo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>🥗 Análisis Nutricional Completo</h1>
+
+        <div id="formularioUsuario" class="formulario-usuario">
+            <h2>📋 Información Personal</h2>
+            <div class="grid-formulario">
+                <div class="campo-formulario">
+                    <label for="edad">Edad:</label>
+                    <input type="number" id="edad" min="1" max="120" required>
+                </div>
+                <div class="campo-formulario">
+                    <label for="sexo">Sexo:</label>
+                    <select id="sexo" required>
+                        <option value="hombre">Hombre</option>
+                        <option value="mujer">Mujer</option>
+                    </select>
+                </div>
+                <div class="campo-formulario">
+                    <label for="peso">Peso (kg):</label>
+                    <input type="number" id="peso" step="0.1" min="20" max="300" required>
+                </div>
+                <div class="campo-formulario">
+                    <label for="altura">Altura (cm):</label>
+                    <input type="number" id="altura" min="100" max="250" required>
+                </div>
+                <div class="campo-formulario">
+                    <label for="actividad">Nivel de Actividad:</label>
+                    <div class="actividad-contenedor">
+                        <select id="actividad" required>
+                            <option value="1.2">Sedentario</option>
+                            <option value="1.375">Ligera actividad</option>
+                            <option value="1.55">Actividad moderada</option>
+                            <option value="1.725">Actividad intensa</option>
+                            <option value="1.9">Actividad muy intensa</option>
+                        </select>
+                        <span class="info-icon" tabindex="0">❓</span>
+                        <div class="tooltip">
+                            Sedentario: poco o ningún ejercicio. <br>
+                            Ligera actividad: ejercicio ligero 1-3 días a la semana. <br>
+                            Actividad moderada: ejercicio moderado 3-5 días a la semana. <br>
+                            Actividad intensa: ejercicio intenso 6-7 días a la semana. <br>
+                            Actividad muy intensa: ejercicio físico diario o trabajo físico.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button onclick="calcularTMB()" class="boton-calcular">Calcular TMB</button>
+            <div id="resultadoTMB" class="resultado-tmb"></div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab activo" onclick="cambiarTab('productos')">🛒 Productos</div>
+            <div class="tab" onclick="cambiarTab('comidas')">🍳 Comidas Preparadas</div>
+            <div class="tab" onclick="cambiarTab('seleccionados')">📋 Seleccionados</div>
+            <div class="tab" onclick="cambiarTab('chatbot')">🤖 Chat Bot</div>
+        </div>
+
+        <div id="seccionProductos" class="activo">
+            <div class="contenedor-busqueda">
+                <input type="text" id="entradaBusqueda" placeholder="Buscar producto (ej: cereales, yogur...)">
+                <button onclick="buscarAlimento()">Buscar</button>
+            </div>
+            <div id="resultadosBusqueda" class="resultados-busqueda"></div>
+        </div>
+
+        <div id="seccionComidas">
+            <div class="entrada-comida">
+                <input type="text" id="entrada-comida" placeholder="Describe tu comida (ej: 2 huevos revueltos)">
+                <button onclick="analizarComida()">Analizar</button>
+            </div>
+            <div id="resultados-nutricion" class="resultados"></div>
+        </div>
+
+        <div id="alimentosSeleccionados" class="alimentos-seleccionados">
+            <h3>🛒 Alimentos seleccionados</h3>
+            <div id="listaAlimentos"></div>
+            <div id="caloriasTotal"></div>
+        </div>
+
+        <div id="seccionSeleccionados">
+            <div class="alimentos-seleccionados">
+                <div id="listaAlimentosSeleccionados"></div>
+            </div>
+        </div>
+
+        <div id="seccionChatBot" class="seccion" style="display: none;">
+            <iframe src="https://www.stack-ai.com/chat-assistant/6e518159-2d35-45d2-ab08-8a4eb70f0916/9bc70732-30f8-4545-817d-ed2819087490/67368fbc333938b493b0fb2b" 
+                    style="width: 100%; height: 600px; border: none;"></iframe>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <button id="copiarDatos" class="boton-calcular">Copiar Datos</button>
+</body>
+</html> 
