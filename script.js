@@ -170,6 +170,9 @@ function cambiarTab(tab) {
     document.getElementById('seccionSeleccionados').style.display = 'none';
     document.getElementById('seccionChatBot').style.display = 'none'; // Ocultar sección del Chat Bot
 
+    // Ocultar el botón "Copiar Datos"
+    document.getElementById('copiarDatos').style.display = 'none'; // Ocultar el botón al cambiar de pestaña
+
     // Mostrar la sección correspondiente con animación
     if (tab === 'informacion') {
         const informacion = document.getElementById('seccionInformacion');
@@ -192,6 +195,7 @@ function cambiarTab(tab) {
         const chatbot = document.getElementById('seccionChatBot');
         chatbot.style.display = 'block'; // Mostrar sección del Chat Bot
         chatbot.classList.add('animated'); // Agregar clase de animación
+        document.getElementById('copiarDatos').style.display = 'block'; // Mostrar el botón "Copiar Datos"
     }
 
     tabActivo = tab;
