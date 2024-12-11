@@ -150,11 +150,11 @@ function calcularTMB() {
         </div>
     `;
 
-    // Mostrar secciones de búsqueda de alimentos y comidas después de calcular TMB
-    document.getElementById('seccionProductos').style.display = 'block';
-    document.getElementById('seccionComidas').style.display = 'block';
-    document.getElementById('seccionSeleccionados').style.display = 'block';
-    document.getElementById('alimentosSeleccionados').style.display = 'block'; // Mostrar sección de alimentos seleccionados
+    // Ocultar secciones de búsqueda de alimentos y comidas después de calcular TMB
+    document.getElementById('seccionProductos').style.display = 'none';
+    document.getElementById('seccionComidas').style.display = 'none';
+    document.getElementById('seccionSeleccionados').style.display = 'none';
+    document.getElementById('alimentosSeleccionados').style.display = 'none'; // Ocultar sección de alimentos seleccionados
 }
 
 function cambiarTab(tab) {
@@ -164,21 +164,34 @@ function cambiarTab(tab) {
         .classList.add('activo');
 
     // Ocultar todas las secciones
+    document.getElementById('seccionInformacion').style.display = 'none'; // Ocultar sección de Información Personal
     document.getElementById('seccionProductos').style.display = 'none';
     document.getElementById('seccionComidas').style.display = 'none';
     document.getElementById('seccionSeleccionados').style.display = 'none';
     document.getElementById('seccionChatBot').style.display = 'none'; // Ocultar sección del Chat Bot
 
-    // Mostrar la sección correspondiente
-    if (tab === 'seleccionados') {
-        document.getElementById('seccionSeleccionados').style.display = 'block';
+    // Mostrar la sección correspondiente con animación
+    if (tab === 'informacion') {
+        const informacion = document.getElementById('seccionInformacion');
+        informacion.style.display = 'block';
+        informacion.classList.add('animated'); // Agregar clase de animación
+    } else if (tab === 'seleccionados') {
+        const seleccionados = document.getElementById('seccionSeleccionados');
+        seleccionados.style.display = 'block';
+        seleccionados.classList.add('animated'); // Agregar clase de animación
         mostrarAlimentosSeleccionados();
     } else if (tab === 'productos') {
-        document.getElementById('seccionProductos').style.display = 'block';
+        const productos = document.getElementById('seccionProductos');
+        productos.style.display = 'block';
+        productos.classList.add('animated'); // Agregar clase de animación
     } else if (tab === 'comidas') {
-        document.getElementById('seccionComidas').style.display = 'block';
+        const comidas = document.getElementById('seccionComidas');
+        comidas.style.display = 'block';
+        comidas.classList.add('animated'); // Agregar clase de animación
     } else if (tab === 'chatbot') {
-        document.getElementById('seccionChatBot').style.display = 'block'; // Mostrar sección del Chat Bot
+        const chatbot = document.getElementById('seccionChatBot');
+        chatbot.style.display = 'block'; // Mostrar sección del Chat Bot
+        chatbot.classList.add('animated'); // Agregar clase de animación
     }
 
     tabActivo = tab;
