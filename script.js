@@ -170,9 +170,6 @@ function cambiarTab(tab) {
     document.getElementById('seccionSeleccionados').style.display = 'none';
     document.getElementById('seccionChatBot').style.display = 'none'; // Ocultar sección del Chat Bot
 
-    // Ocultar el botón "Copiar Datos"
-    document.getElementById('copiarDatos').style.display = 'none'; // Ocultar el botón al cambiar de pestaña
-
     // Mostrar la sección correspondiente con animación
     if (tab === 'informacion') {
         const informacion = document.getElementById('seccionInformacion');
@@ -195,7 +192,6 @@ function cambiarTab(tab) {
         const chatbot = document.getElementById('seccionChatBot');
         chatbot.style.display = 'block'; // Mostrar sección del Chat Bot
         chatbot.classList.add('animated'); // Agregar clase de animación
-        document.getElementById('copiarDatos').style.display = 'block'; // Mostrar el botón "Copiar Datos"
     }
 
     tabActivo = tab;
@@ -204,11 +200,14 @@ function cambiarTab(tab) {
 function mostrarAlimentosSeleccionados() {
     const listaAlimentosSeleccionados = document.getElementById('listaAlimentosSeleccionados');
     let html = '<h3>🛒 Alimentos Seleccionados</h3>';
+    let caloriasTotales = 0; // Variable para acumular las calorías totales
 
     if (todosLosAlimentos.length === 0) {
         html += '<p>No hay alimentos seleccionados</p>';
     } else {
         todosLosAlimentos.forEach((alimento, indice) => {
+            const caloriasAlimento = Math.round(alimento.nutrientes.calorias * alimento.cantidad / 100);
+            caloriasTotales += caloriasAlimento; // Sumar las calorías de cada alimento
             html += `
                 <div class="tarjeta-alimento-seleccionado">
                     ${alimento.urlImagen ? 
@@ -217,7 +216,7 @@ function mostrarAlimentosSeleccionados() {
                     }
                     <div class="info-alimento-seleccionado">
                         <h4>${alimento.nombre}</h4>
-                        <p>🔥 Calorías: ${Math.round(alimento.nutrientes.calorias * alimento.cantidad / 100)} kcal</p>
+                        <p>🔥 Calorías: ${caloriasAlimento} kcal</p>
                         <p>📏 Cantidad: ${alimento.cantidad}g</p>
                     </div>
                     <div class="controles-alimento-seleccionado">
@@ -234,7 +233,20 @@ function mostrarAlimentosSeleccionados() {
             `;
         });
 
-        html += '<div id="caloriasTotal"></div>';
+        html += `<div id="caloriasTotal">🔥 Calorías Totales: ${caloriasTotales} kcal</div>`; // Mostrar calorías totales
+
+        // Calcular la diferencia con respecto a las calorías diarias
+        const caloriasDiarias = Math.round(datosUsuario.tmb); // Obtener las calorías diarias
+        const diferenciaCalorias = caloriasDiarias - caloriasTotales; // Calcular la diferencia
+
+        // Mostrar mensaje sobre la diferencia de calorías
+        if (diferenciaCalorias > 0) {
+            html += `<div class="mensaje-calorias">🔻 Te faltan ${diferenciaCalorias} kcal para alcanzar tu objetivo diario.</div>`;
+        } else if (diferenciaCalorias < 0) {
+            html += `<div class="mensaje-calorias">⚠️ Te sobran ${Math.abs(diferenciaCalorias)} kcal sobre tu objetivo diario.</div>`;
+        } else {
+            html += `<div class="mensaje-calorias">✅ Estás exactamente en tu objetivo calórico.</div>`;
+        }
     }
 
     listaAlimentosSeleccionados.innerHTML = html;
@@ -499,4 +511,37 @@ document.getElementById('entrada-comida').addEventListener('keypress', function(
     if (e.key === 'Enter') {
         analizarComida();
     }
+});
+
+document.getElementById('seccionChatBot').addEventListener('mouseenter', function() {
+    document.getElementById('copiarDatosChatBot').style.display = 'block'; // Mostrar el botón al entrar
+});
+
+document.getElementById('seccionChatBot').addEventListener('mouseleave', function() {
+    document.getElementById('copiarDatosChatBot').style.display = 'none'; // Ocultar el botón al salir
+});
+
+// Función para copiar los datos del usuario
+document.getElementById('copiarDatosChatBot').addEventListener('click', function() {
+    const datos = `
+        Edad: ${document.getElementById('edad').value}
+        Sexo: ${document.getElementById('sexo').value}
+        Peso: ${document.getElementById('peso').value} kg
+        Altura: ${document.getElementById('altura').value} cm
+        Nivel de Actividad: ${document.getElementById('actividad').value}
+        TMB: ${Math.round(datosUsuario.tmb)} kcal
+        Desayuno: 
+        Almuerzo: 
+        Postre: 
+        Merienda: 
+        Cena: 
+        Objetivo de la Dieta: 
+        Enfermedad Relacionada a su Alimentación: 
+    `;
+
+    navigator.clipboard.writeText(datos).then(() => {
+        alert('Datos copiados al portapapeles!');
+    }).catch(err => {
+        console.error('Error al copiar: ', err);
+    });
 });
