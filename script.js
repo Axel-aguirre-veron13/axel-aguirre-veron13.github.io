@@ -192,6 +192,7 @@ function cambiarTab(tab) {
         const chatbot = document.getElementById('seccionChatBot');
         chatbot.style.display = 'block'; // Mostrar sección del Chat Bot
         chatbot.classList.add('animated'); // Agregar clase de animación
+        document.getElementById('copiarDatosChatBot').style.display = 'block'; // Asegurarse de que el botón esté visible
     }
 
     tabActivo = tab;
@@ -515,10 +516,6 @@ document.getElementById('entrada-comida').addEventListener('keypress', function(
 
 document.getElementById('seccionChatBot').addEventListener('mouseenter', function() {
     document.getElementById('copiarDatosChatBot').style.display = 'block'; // Mostrar el botón al entrar
-});
-
-document.getElementById('seccionChatBot').addEventListener('mouseleave', function() {
-    document.getElementById('copiarDatosChatBot').style.display = 'none'; // Ocultar el botón al salir
 });
 
 // Función para copiar los datos del usuario
